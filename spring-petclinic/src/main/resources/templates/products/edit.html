@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'productos')}"> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <body>
+        <h2>Cambiar Productos</h2>
+        <form th:object="${products}" method="post">
+            <div class="form-group">
+                <label for="">Nombre</label>
+                <input th:field="${products.nombre}"  type="text" class="form-control" required >
+            </div>
+            <div class="form-group">
+                <label for="">Precio</label>
+                <input th:field="${products.precio}" type="number"   required >
+            </div>
+            <div class="form-group">
+                <label for="">Descripcion</label>
+                <input th:field="${products.descripcion}" type="text" class="form-control"  required >
+            </div>
+            <div class="form-group">
+                <label for="">Cantidad</label>
+                <input th:field="${products.cantidad}" type="number"  required >
+            </div>
+             <div class="form-group">
+                <label for="">Imagen</label>
+                <input th:field="${products.imagen}" type="file"   required >
+            </div>
+            <div>
+                  <button type="submit" class="btn btn-default" >Guardar</button>  
+            </div>
+        </form>
+    </body>
+</html>
+

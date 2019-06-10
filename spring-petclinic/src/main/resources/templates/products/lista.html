@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<html>
+
+    <html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'productos')}">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+        <body>
+            <h2>              PRODUCTOS</h2>
+           
+            <br>
+            <br>
+
+       <table class="table table-striped table-dark"
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Producto</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Cantidad</th>
+       <th scope="col">Imagen</th>
+        <th scope="col">  </th>
+    </tr>
+  </thead>
+  <tbody>
+    
+        <tr th:each="products : ${selections}">
+                    <td scope="row" th:text="${products.id}"/>
+                    <td th:text="${products.nombre}"/>
+                        <td th:text="${products.descripcion}"/>
+                    <td th:text="${products.precio}"/>
+                    <td th:text="${products.cantidad}"/>
+                    
+                    <td>
+                        <img th:src="@{ /resources/imagenes/__${products.imagen}__}"  width="60" height="60"/>
+                        <a th:href="@{products/__${products.id}__/edit}" class="btn btn-default">
+                            <i >Editar</i>
+                        </a>
+                          <form    th:action="@{/products/__${products.id}__/delete}" method="POST" style="display:inline-block;">
+                            <button class="btn btn-default" type="submit" method="post" >
+                                <i>Eliminar</i>
+                               </button>
+                        </form>
+                        
+                        
+                    </td>
+                    
+        </tr>
+
+  </tbody>
+</table>
+            <a class="btn btn-default" href="products/crearProductos"><i>Agregar Productos</i></a>
+       <div class="modal fade" id="modal1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            &times;
+                        </button>
+                        <h5 class="modal-title">Agregar Producto</h5>
+                    </div>  
+                    <div class="modal-body">
+                        <form th:object="${products}" method="post">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="">Nombre del producto</label>
+                                    <input  th:field="${products.nombre}" required  class="form-control" type="text"  name="nombre">
+                                  
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Precio</label>
+                                    <input  th:field="${products.precio}" required class="form-control" type="text" name="precio" >
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Descripcion </label>
+                                    <input  th:field="${products.descripcion}" required  type="text" name="descripcion">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">cantidad existente</label>
+                                    <input  th:field="${products.cantidad}" required  type="number" class="form-control" name="cantidad">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Imagen</label>
+                                    <input  th:field="${products.imagen}" required  type="file"  accept="image/*" name="imagen">
+                                    
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-success" type="submit">Guardar</button>
+                                </div>                  
+                            </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+
+        </body>
+
+    </html>
